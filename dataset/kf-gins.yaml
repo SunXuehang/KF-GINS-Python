@@ -1,0 +1,58 @@
+# KF-GINS configuration file
+
+# IMU和GNSS数据文件路径（处理TLIO数据集的数据输出路径 同时也是 组合导航的数据输入路径）
+input_path: "./dataset/146734859523827"
+output_path: "./output"
+
+# IMU文件列数 (只会用前7列IMU数据)
+# IMU data columns, only use the first seven columns
+imudatalen: 7
+# IMU原始数据频率 （根据数据集中的imu_samples_0.csv设置）
+rawimudatarate: 1000
+# IMU datarate [Hz] （根据数据集中的imu_resampled_0.npy设置）
+imudatarate: 200
+# GNSS数据输入频率  可修改
+# GNSS datarate [Hz]
+gnssdatarate: 1
+
+# 初始IMU零偏和比例因子, IMU的三个轴(前、右、下)
+# initial IMU bias and scale error, three axes of the imu (forward, right and down)
+initgyrbias: [ 0.0, 0.0, 0.0 ]    # [deg/h]
+initaccbias: [ 0.0, 0.0, 0.0 ]    # [mGal]
+initgyrscale: [ 0.0, 0.0, 0.0 ]   # [ppm]
+initaccscale: [ 0.0, 0.0, 0.0 ]   # [ppm]
+
+# 初始状态标准差
+# initial state std
+# 初始位置标准差, 导航坐标系下 北向, 东向和垂向
+# initial position std, north, east and down in n-frame. [m, m, m]
+initposstd: [ 1.0, 1.0, 0.8 ]
+
+# 初始速度标准差, 导航坐标系下北向、东向和垂向速度
+# initial velocity std, north, east and down speed in n-frame. [m/s, m/s, m/s]
+initvelstd: [ 1.3, 1.4, 1.4 ]
+
+# 初始姿态标准差, 横滚、俯仰、航向角标准差
+# initial attitude std, roll, pitch and yaw std. [deg, deg, deg]
+initattstd: [ 2, 2, 5 ]
+
+# 初始IMU零偏和比例因子标准差, IMU的三个轴
+# initial IMU bias and scale error std, thrss axes of the imu
+# 如果不指定，默认按照IMU零偏和比例因子误差参数设定
+# default to the noise parameters of IMU bias and scale error.
+#initbgstd: [ 1, 1, 1 ]          # [deg/h]
+#initbastd: [ 50, 50, 50 ]       # [mGal]
+#initsgstd: [ 300, 300, 300 ]    # [ppm]
+#initsastd: [ 300, 300, 300 ]    # [ppm]
+
+# IMU噪声建模参数, IMU的三个轴
+# IMU noise parameters
+imunoise:
+  arw: [15.0, 15.0, 15.0]          # [deg/sqrt(hr)]
+  vrw: [15.0, 15.0, 15.0]          # [m/s/sqrt(hr)]
+  gbstd: [200.0, 200.0, 200.0]     # [deg/hr]
+  abstd: [7000.0, 7000.0, 7000.0]  # [mGal]
+  gsstd: [300.0, 300.0, 300.0]  # [ppm]
+  asstd: [300.0, 300.0, 300.0]  # [ppm]
+  corrtime: 1.0                    # [hr]
+
